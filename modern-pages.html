@@ -12,11 +12,12 @@
         <button onclick="addPage()" title="Add page">➕</button>
         <button onclick="window.print()" title="Print">🖨️</button>
         <button onclick="toggleDarkMode()" title="Toggle dark mode">🌙</button>
+        <button id="edit-toggle" onclick="toggleEditMode()" title="Edit mode">✏️</button>
         <button onclick="saveDocument()" title="Save document">💾</button>
     </div>
 
     <div class="document" id="document">
-        <div class="page" contenteditable="true">
+        <div class="page" contenteditable="false">
             <h1>First Page</h1>
             <p>This document uses <strong>virtual paper sheets</strong> with a modern and responsive approach.</p>
 
@@ -36,7 +37,7 @@
             <img src="https://via.placeholder.com/150" alt="Example placeholder image">
         </div>
 
-        <div class="page" contenteditable="true">
+        <div class="page" contenteditable="false">
             <h1>Second Page</h1>
             <p>This page demonstrates automatic page breaks and advanced formatting.</p>
 

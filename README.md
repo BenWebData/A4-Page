@@ -9,6 +9,7 @@ Open `modern-pages.html` in your web browser. Use the toolbar in the top-right c
 - **Add page**: append a new editable page.
 - **Print**: open the print dialog.
 - **Toggle dark mode**: switch between light and dark themes.
+- **Edit mode**: enable or disable editing after entering credentials.
 - **Save**: persist page content and theme preference locally.
 
 The document supports automatic and manual page breaks, responsive design, and dark mode.

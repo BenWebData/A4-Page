@@ -6,6 +6,9 @@ const CONFIG = {
     debounceDelay: 300
 };
 
+const EDIT_CREDENTIALS = { username: 'admin', password: 'secret' };
+let editMode = false;
+
 // Utilitaires modernes
 const utils = {
     debounce(func, wait) {
@@ -133,7 +136,7 @@ class PageManager {
 function addPage() {
     const docElement = document.getElementById('document');
     const newPage = utils.createElement('div', 'page');
-    newPage.contentEditable = 'true';
+    newPage.contentEditable = editMode ? 'true' : 'false';
     newPage.innerHTML = '<h1>New Page</h1><p>Start typing here...</p>';
     docElement.appendChild(newPage);
     newPage.focus();
@@ -141,6 +144,23 @@ function addPage() {
 
 function toggleDarkMode() {
     document.documentElement.classList.toggle("dark-mode");
+}
+
+function toggleEditMode() {
+    if (!editMode) {
+        const user = prompt('Username:');
+        const pass = prompt('Password:');
+        if (user !== EDIT_CREDENTIALS.username || pass !== EDIT_CREDENTIALS.password) {
+            alert('Invalid credentials');
+            return;
+        }
+    }
+    editMode = !editMode;
+    document.querySelectorAll('.page').forEach(pg => {
+        pg.contentEditable = editMode;
+    });
+    const btn = document.getElementById('edit-toggle');
+    if (btn) btn.textContent = editMode ? '✅' : '✏️';
 }
 function saveDocument() {
     const docElement = document.getElementById("document");
@@ -164,6 +184,9 @@ function loadDocument() {
 document.addEventListener('DOMContentLoaded', () => {
     loadDocument();
     new PageManager();
+    document.querySelectorAll('.page').forEach(pg => {
+        pg.contentEditable = editMode;
+    });
 });
 
 // Support des raccourcis clavier
