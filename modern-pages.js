@@ -162,6 +162,24 @@ function toggleEditMode() {
     const btn = document.getElementById('edit-toggle');
     if (btn) btn.textContent = editMode ? '✅' : '✏️';
 }
+
+async function pasteHtml() {
+    if (!editMode) {
+        alert('Enable edit mode first.');
+        return;
+    }
+    try {
+        const html = await navigator.clipboard.readText();
+        if (html) {
+            document.execCommand('insertHTML', false, html);
+        }
+    } catch (err) {
+        const html = prompt('Paste your HTML here:');
+        if (html) {
+            document.execCommand('insertHTML', false, html);
+        }
+    }
+}
 function saveDocument() {
     const docElement = document.getElementById("document");
     localStorage.setItem("modern-doc-content", docElement.innerHTML);
