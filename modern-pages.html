@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Émulation de vraies feuilles de papier dans des documents web (HTML et CSS modernes)">
-    <title>Feuilles de Papier Modernes</title>
+    <meta name="description" content="Emulation of real paper sheets in web documents using modern HTML and CSS">
+    <title>Modern Paper Pages</title>
     <style>
         /* Variables CSS pour une maintenance facile */
         :root {
@@ -367,40 +367,44 @@
 </head>
 <body>
     <div class="toolbar">
-        <button onclick="addPage()" title="Ajouter une page">➕</button>
-        <button onclick="window.print()" title="Imprimer">🖨️</button>
-        <button onclick="toggleDarkMode()" title="Mode sombre">🌙</button>
+        <button onclick="addPage()" title="Add page">➕</button>
+        <button onclick="window.print()" title="Print">🖨️</button>
+        <button onclick="toggleDarkMode()" title="Toggle dark mode">🌙</button>
+        <button onclick="saveDocument()" title="Save document">💾</button>
     </div>
 
     <div class="document" id="document">
         <div class="page" contenteditable="true">
-            <h1>Première Page</h1>
-            <p>Ce document utilise des <strong>feuilles de papier virtuelles</strong> avec une approche moderne et responsive.</p>
-            
-            <h2>Fonctionnalités</h2>
+            <h1>First Page</h1>
+            <p>This document uses <strong>virtual paper sheets</strong> with a modern and responsive approach.</p>
+
+            <h2>Features</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            
+
             <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
-            <h3>Exemple de code</h3>
-            <p>Voici un exemple de <code>code inline</code> et un bloc de code :</p>
-            
-            <pre><code>function modernerDocument() {
-    console.log("Document modernisé !");
+            <h3>Code Example</h3>
+            <p>Here is an example of <code>inline code</code> and a code block:</p>
+
+            <pre><code>function modernizeDocument() {
+    console.log("Document updated!");
 }</code></pre>
+
+            <p>An example image:</p>
+            <img src="https://via.placeholder.com/150" alt="Example placeholder image">
         </div>
 
         <div class="page" contenteditable="true">
-            <h1>Deuxième Page</h1>
-            <p>Cette page démontre la gestion automatique des sauts de page et la mise en forme avancée.</p>
-            
-            <h2>Tableau d'exemple</h2>
+            <h1>Second Page</h1>
+            <p>This page demonstrates automatic page breaks and advanced formatting.</p>
+
+            <h2>Example Table</h2>
             <table>
                 <thead>
                     <tr>
-                        <th>Fonctionnalité</th>
-                        <th>Ancien</th>
-                        <th>Moderne</th>
+                        <th>Feature</th>
+                        <th>Old</th>
+                        <th>Modern</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -410,7 +414,7 @@
                         <td>✅</td>
                     </tr>
                     <tr>
-                        <td>Mode sombre</td>
+                        <td>Dark mode</td>
                         <td>❌</td>
                         <td>✅</td>
                     </tr>
@@ -428,11 +432,11 @@
             </table>
 
             <div class="page-break"></div>
-            
-            <h2>Après un saut de page manuel</h2>
-            <p>Ce paragraphe apparaît après un saut de page manuel créé avec <code>&lt;div class="page-break"&gt;&lt;/div&gt;</code>.</p>
-            
-            <p>Le système gère automatiquement les sauts de page pour éviter que le contenu ne déborde des limites de la page virtuelle.</p>
+
+            <h2>After a Manual Page Break</h2>
+            <p>This paragraph appears after a manual page break created with <code>&lt;div class="page-break"&gt;&lt;/div&gt;</code>.</p>
+
+            <p>The system automatically manages page breaks so that content stays within the boundaries of the virtual page.</p>
         </div>
     </div>
 
@@ -573,24 +577,44 @@
             const docElement = document.getElementById('document');
             const newPage = utils.createElement('div', 'page');
             newPage.contentEditable = 'true';
-            newPage.innerHTML = '<h1>Nouvelle Page</h1><p>Commencez à taper ici...</p>';
+            newPage.innerHTML = '<h1>New Page</h1><p>Start typing here...</p>';
             docElement.appendChild(newPage);
             newPage.focus();
         }
 
         function toggleDarkMode() {
             document.documentElement.style.setProperty(
-                '--background-color', 
+                '--background-color',
                 document.documentElement.style.getPropertyValue('--background-color') === '#1a1a1a' ? '#f5f5f5' : '#1a1a1a'
             );
             document.documentElement.style.setProperty(
-                '--paper-color', 
+                '--paper-color',
                 document.documentElement.style.getPropertyValue('--paper-color') === '#2d2d2d' ? '#ffffff' : '#2d2d2d'
             );
         }
 
+        function saveDocument() {
+            const docElement = document.getElementById('document');
+            localStorage.setItem('modern-doc-content', docElement.innerHTML);
+            const darkMode = document.documentElement.style.getPropertyValue('--background-color') === '#1a1a1a';
+            localStorage.setItem('modern-dark-mode', darkMode ? '1' : '0');
+        }
+
+        function loadDocument() {
+            const savedContent = localStorage.getItem('modern-doc-content');
+            if (savedContent) {
+                document.getElementById('document').innerHTML = savedContent;
+            }
+            const darkMode = localStorage.getItem('modern-dark-mode');
+            if (darkMode === '1') {
+                document.documentElement.style.setProperty('--background-color', '#1a1a1a');
+                document.documentElement.style.setProperty('--paper-color', '#2d2d2d');
+            }
+        }
+
         // Initialisation moderne avec DOMContentLoaded
         document.addEventListener('DOMContentLoaded', () => {
+            loadDocument();
             new PageManager();
         });
 
@@ -605,6 +629,10 @@
                     case 'n':
                         e.preventDefault();
                         addPage();
+                        break;
+                    case 's':
+                        e.preventDefault();
+                        saveDocument();
                         break;
                 }
             }
