@@ -1,6 +1,7 @@
 # Modern Paper Pages
 
 This project demonstrates how to emulate real paper sheets in a single-page HTML document using modern HTML, CSS, and JavaScript.
+All style rules and scripts are embedded directly in `modern-pages.html`, so no external assets are required.
 
 ## Usage
 
