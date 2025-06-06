@@ -41,7 +41,8 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            padding: var(--page-spacing) 1rem;
+            /* Top spacing is handled by pages themselves */
+            padding: 0 1rem var(--page-spacing);
         }
 
         /* Styles des pages */
@@ -49,7 +50,7 @@
             width: var(--page-width);
             min-height: var(--page-height);
             max-width: calc(100vw - 2rem);
-            margin-bottom: var(--page-spacing);
+            margin: var(--page-spacing) auto;
             padding: var(--page-margin);
             background: var(--paper-color);
             border-radius: 4px;
